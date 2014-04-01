@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Curator.Core
 {
-    public class ConfigManager
+    public class ConfigManager : Curator.Utils.IConfigManager
     {
         /// <summary>
         /// Another singleton class. Manages configuration settings, in memory for now.
@@ -24,7 +24,7 @@ namespace Curator.Core
 
         private ConfigManager()
         {
-            this._interval = 10000;
+            this._interval = 15000;
             this._wallpaperLocations = new List<string>() { System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures) };
             this._stretchStyle = Curator.Utils.StretchStyles.Stretch;
         }
@@ -57,6 +57,7 @@ namespace Curator.Core
             set
             {
                 this._interval = value;
+                Curator.Utils.SlideshowTimer.GetInstance.Interval = this._interval;
             }
         }
 
@@ -69,6 +70,7 @@ namespace Curator.Core
             set
             {
                 this._wallpaperLocations = value;
+                Curator.Utils.WallpaperChanger.GetInstance.SelectedWallpaperLocations = this._wallpaperLocations;
             }
         }
 
@@ -81,6 +83,7 @@ namespace Curator.Core
             set
             {
                 this._stretchStyle = value;
+                Curator.Utils.WallpaperChanger.GetInstance.StretchStyle = this._stretchStyle;
             }
         }
 
