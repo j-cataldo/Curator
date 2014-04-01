@@ -14,7 +14,7 @@ namespace Curator.Core
         {
             _trayIcon = new Curator.UI.TrayIcon();
             Curator.UI.ConfigureForm configureForm = new Curator.UI.ConfigureForm(ConfigManager.GetInstance);
-            configureForm.Show();
+            configureForm.ShowDialog();
 
             Curator.Utils.SlideshowTimer.GetInstance.Interval = ConfigManager.GetInstance.Interval;
             Curator.Utils.WallpaperChanger.GetInstance.SelectedWallpaperLocations = ConfigManager.GetInstance.WallpaperLocations;
