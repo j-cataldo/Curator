@@ -102,7 +102,7 @@ namespace Curator.Utils
 
         public void SetPreviousWallpaper()
         {
-            if (--_currentWallpaperIndex <= 0)
+            if (--_currentWallpaperIndex < 0)
             {
                 _currentWallpaperIndex = _wallpaperImagePaths.Count - 1;
             }
@@ -235,6 +235,8 @@ namespace Curator.Utils
                 _wallpaperImagePaths[k] = _wallpaperImagePaths[n];
                 _wallpaperImagePaths[n] = value;
             }
+
+            _currentWallpaperIndex = 0;
         }
     }
 
