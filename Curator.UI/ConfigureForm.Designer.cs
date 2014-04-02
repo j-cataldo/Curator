@@ -46,6 +46,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.browseButton = new System.Windows.Forms.Button();
+            this.sourcesTreeView = new System.Windows.Forms.TreeView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
@@ -298,6 +299,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 105F));
             this.tableLayoutPanel3.Controls.Add(this.browseButton, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.sourcesTreeView, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -317,6 +319,14 @@
             this.browseButton.Text = "Add Source";
             this.browseButton.UseVisualStyleBackColor = true;
             this.browseButton.Click += new System.EventHandler(this.browseButton_Click_1);
+            // 
+            // sourcesTreeView
+            // 
+            this.sourcesTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sourcesTreeView.Location = new System.Drawing.Point(3, 3);
+            this.sourcesTreeView.Name = "sourcesTreeView";
+            this.sourcesTreeView.Size = new System.Drawing.Size(647, 223);
+            this.sourcesTreeView.TabIndex = 6;
             // 
             // tabPage2
             // 
@@ -575,6 +585,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button browseButton;
+        private System.Windows.Forms.TreeView sourcesTreeView;
 
     }
 }
