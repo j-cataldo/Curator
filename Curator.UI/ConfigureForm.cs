@@ -18,6 +18,54 @@ namespace Curator.UI
         {
             InitializeComponent();
             this._configManager = configManager;
+
+            Curator.Utils.WinAPI.RegisterHotKey(this.Handle, 0, 0x0001 | 0x0002, 0x27);
+            Curator.Utils.WinAPI.RegisterHotKey(this.Handle, 1, 0x0001 | 0x0002, 0x25);
+            Curator.Utils.WinAPI.RegisterHotKey(this.Handle, 2, 0x0001 | 0x0002, 0x26);
+            Curator.Utils.WinAPI.RegisterHotKey(this.Handle, 3, 0x0001 | 0x0002, 0x28);
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == 0x0312)
+            {
+                int id = m.WParam.ToInt32();
+
+
+                // Bind "CTRL + ALT + RIGHT" to Next
+                if (id == 0)
+                {
+                    Curator.Utils.WallpaperChanger.GetInstance.SetNextWallpaper();
+                }
+
+                // Bind "CTRL + ALT + LEFT" to Previous
+                else if (id == 1)
+                {
+                    Curator.Utils.WallpaperChanger.GetInstance.SetPreviousWallpaper();
+                }
+
+                // Bind "CTRL + ALT + DOWN" to Pause/Resume
+                else if (id == 2)
+                {
+                    if (Curator.Utils.SlideshowTimer.GetInstance.Enabled)
+                    {
+                        Curator.Utils.SlideshowTimer.GetInstance.Stop();
+                    }
+                    else
+                    {
+                        Curator.Utils.SlideshowTimer.GetInstance.Start();
+                    }
+                }
+
+                // Bind "CTRL + ALT + UP" to Re-shuffle
+                else if (id == 3)
+                {
+                    Curator.Utils.WallpaperChanger.GetInstance.ShuffleWallpaperImages();
+                    Curator.Utils.WallpaperChanger.GetInstance.SetNextWallpaper();
+                }
+
+            }
+            base.WndProc(ref m);
         }
 
         protected virtual void OnApplyChanges(EventArgs e)
