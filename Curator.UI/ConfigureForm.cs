@@ -78,6 +78,27 @@ namespace Curator.UI
 
         }
 
+        private void PopulateImageSetTree()
+        {
+            foreach (string source in this._configManager.WallpaperLocations)
+            {
+                bool alreadyListed = false;
+
+                foreach (TreeNode node in this.sourcesTreeView.Nodes)
+                {
+                    if (node.Text == source)
+                    {
+                        alreadyListed = true;
+                    }
+                }
+
+                if (!alreadyListed)
+                {
+                    this.sourcesTreeView.Nodes.Add(source);
+                }
+            }
+        }
+
         private void ConfigureForm_Load(object sender, EventArgs e)
         {
             int interval = _configManager.Interval;
@@ -85,6 +106,8 @@ namespace Curator.UI
             styleComboBox.SelectedIndex = (int)_configManager.StretchStyle;
             selectedTimeUnits.SelectedIndex = 0;
             timeIntervalInput.Text = Convert.ToString(interval / 1000);
+
+            PopulateImageSetTree();
 
             applyButton.Enabled = false;
         }
@@ -126,8 +149,13 @@ namespace Curator.UI
             DialogResult result = folderBrowserDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                _configManager.WallpaperLocations = new List<string> { folderBrowserDialog.SelectedPath };
+                if (!_configManager.WallpaperLocations.Contains(folderBrowserDialog.SelectedPath))
+                {
+                    _configManager.WallpaperLocations.Add(folderBrowserDialog.SelectedPath);
+                }
             }
+
+            PopulateImageSetTree();
 
             applyButton.Enabled = true;
         }
