@@ -44,7 +44,7 @@ namespace Curator.UI
                     Curator.Utils.WallpaperChanger.GetInstance.SetPreviousWallpaper();
                 }
 
-                // Bind "CTRL + ALT + DOWN" to Pause/Resume
+                // Bind "CTRL + ALT + DOWN" to Re-shuffle
                 else if (id == 2)
                 {
                     if (Curator.Utils.SlideshowTimer.GetInstance.Enabled)
@@ -57,7 +57,7 @@ namespace Curator.UI
                     }
                 }
 
-                // Bind "CTRL + ALT + UP" to Re-shuffle
+                // Bind "CTRL + ALT + UP" to Pause/Resume
                 else if (id == 3)
                 {
                     Curator.Utils.WallpaperChanger.GetInstance.ShuffleWallpaperImages();
