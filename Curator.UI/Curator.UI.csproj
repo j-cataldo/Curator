@@ -92,7 +92,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\TrayIcon.ico" />
+    <EmbeddedResource Include="Resources\TrayIcon.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Curator.Utils\Curator.Utils.csproj">
