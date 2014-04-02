@@ -12,13 +12,13 @@ namespace Curator.Core
 
         public ApplicationManager()
         {
-            _trayIcon = new Curator.UI.TrayIcon();
-
             Curator.Utils.SlideshowTimer.GetInstance.Interval = ConfigManager.GetInstance.Interval;
             Curator.Utils.WallpaperChanger.GetInstance.SelectedWallpaperLocations = ConfigManager.GetInstance.WallpaperLocations;
             Curator.Utils.WallpaperChanger.GetInstance.StretchStyle = ConfigManager.GetInstance.StretchStyle;
 
+            _trayIcon = new Curator.UI.TrayIcon(ConfigManager.GetInstance);
             Curator.UI.ConfigureForm configureForm = new Curator.UI.ConfigureForm(ConfigManager.GetInstance);
+            ConfigManager.GetInstance.ConfigureForm = configureForm;
             configureForm.ShowDialog();
 
             Application.ApplicationExit += this.ApplicationExitHandler;

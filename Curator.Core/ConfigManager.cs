@@ -22,6 +22,8 @@ namespace Curator.Core
         private List<string> _wallpaperLocations;
         private Curator.Utils.StretchStyles _stretchStyle;
 
+        private Curator.UI.ConfigureForm _configureForm;
+
         private ConfigManager()
         {
             this._interval = 15000;
@@ -45,6 +47,26 @@ namespace Curator.Core
                 }
 
                 return _configManagerInstance;
+            }
+        }
+
+        public Curator.UI.ConfigureForm ConfigureForm
+        {
+            get
+            {
+                return this._configureForm;
+            }
+            set
+            {
+                this._configureForm = value;
+            }
+        }
+
+        public void showConfigureForm()
+        {
+            if (this._configureForm == null || !this._configureForm.Visible)
+            {
+                this._configureForm.ShowDialog();
             }
         }
 

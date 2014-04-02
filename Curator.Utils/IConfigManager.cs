@@ -10,5 +10,7 @@ namespace Curator.Utils
         int Interval { get; set;}
         List<string> WallpaperLocations { get; set; }
         Curator.Utils.StretchStyles StretchStyle { get; set; }
+
+        void showConfigureForm();
     }
 }

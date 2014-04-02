@@ -12,8 +12,12 @@ namespace Curator.UI
         private readonly NotifyIcon _notifyIcon;
         private readonly ContextMenuStrip _contextMenu;
 
-        public TrayIcon()
+        private Curator.Utils.IConfigManager _configManager;
+
+        public TrayIcon(Curator.Utils.IConfigManager configManager)
         {
+            this._configManager = configManager;
+
             _contextMenu = new ContextMenuStrip();
             this._contextMenu.Items.Add("&Configure", null, this.ConfigureContextMenuClickHandler).Font = new Font(this._contextMenu.Font, FontStyle.Bold);
             this._contextMenu.Items.Add("-");
@@ -62,12 +66,12 @@ namespace Curator.UI
 
         private void TrayIconDoubleClickHandler(object sender, MouseEventArgs e)
         {
-            
+            _configManager.showConfigureForm();
         }
 
         private void ConfigureContextMenuClickHandler(object sender, EventArgs eventArgs)
         {
-
+            _configManager.showConfigureForm();
         }
 
         private void NextContextMenuClickHandler(object sender, EventArgs eventArgs)
