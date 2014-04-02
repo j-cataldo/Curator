@@ -82,7 +82,7 @@ namespace Curator.UI
         {
             int interval = _configManager.Interval;
 
-            styleComboBox.SelectedIndex = 0;
+            styleComboBox.SelectedIndex = (int)_configManager.StretchStyle;
             selectedTimeUnits.SelectedIndex = 0;
             timeIntervalInput.Text = Convert.ToString(interval/1000);
 
