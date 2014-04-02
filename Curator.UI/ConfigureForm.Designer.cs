@@ -44,6 +44,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.browseButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -76,6 +77,7 @@
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -183,6 +185,7 @@
             this.selectedTimeUnits.Name = "selectedTimeUnits";
             this.selectedTimeUnits.Size = new System.Drawing.Size(121, 23);
             this.selectedTimeUnits.TabIndex = 3;
+            this.selectedTimeUnits.SelectedIndexChanged += new System.EventHandler(this.selectedTimeUnits_SelectedIndexChanged_1);
             // 
             // timeIntervalInput
             // 
@@ -194,6 +197,7 @@
             this.timeIntervalInput.Size = new System.Drawing.Size(100, 21);
             this.timeIntervalInput.TabIndex = 2;
             this.timeIntervalInput.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.timeIntervalInput.TextChanged += new System.EventHandler(this.timeIntervalInput_TextChanged_1);
             // 
             // label2
             // 
@@ -279,7 +283,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.browseButton);
+            this.tabPage1.Controls.Add(this.tableLayoutPanel3);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -288,16 +292,31 @@
             this.tabPage1.Text = "Sets";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 105F));
+            this.tableLayoutPanel3.Controls.Add(this.browseButton, 1, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(758, 229);
+            this.tableLayoutPanel3.TabIndex = 0;
+            // 
             // browseButton
             // 
+            this.browseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.browseButton.AutoSize = true;
-            this.browseButton.Location = new System.Drawing.Point(6, 6);
+            this.browseButton.Location = new System.Drawing.Point(656, 203);
             this.browseButton.Name = "browseButton";
-            this.browseButton.Size = new System.Drawing.Size(105, 23);
-            this.browseButton.TabIndex = 3;
-            this.browseButton.Text = "Browse for folder...";
+            this.browseButton.Size = new System.Drawing.Size(99, 23);
+            this.browseButton.TabIndex = 5;
+            this.browseButton.Text = "Add Source";
             this.browseButton.UseVisualStyleBackColor = true;
-            this.browseButton.Click += new System.EventHandler(this.browseButton_Click);
+            this.browseButton.Click += new System.EventHandler(this.browseButton_Click_1);
             // 
             // tabPage2
             // 
@@ -507,7 +526,8 @@
             this.groupBox2.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
@@ -544,7 +564,6 @@
         private System.Windows.Forms.ToolStripMenuItem exportConfigurationAsToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.PictureBox imagePreview;
-        private System.Windows.Forms.Button browseButton;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.ComboBox styleComboBox;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
@@ -554,6 +573,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Button browseButton;
 
     }
 }

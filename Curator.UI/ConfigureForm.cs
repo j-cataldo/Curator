@@ -151,5 +151,20 @@ namespace Curator.UI
         {
             applyButton.Enabled = true;
         }
+
+        private void browseButton_Click_1(object sender, EventArgs e)
+        {
+            browseButton_Click(sender, e);
+        }
+
+        private void selectedTimeUnits_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            selectedTimeUnits_SelectedIndexChanged(sender, e);
+        }
+
+        private void timeIntervalInput_TextChanged_1(object sender, EventArgs e)
+        {
+            timeIntervalInput_TextChanged(sender, e);
+        }
     }
 }
