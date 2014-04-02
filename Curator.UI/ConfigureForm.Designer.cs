@@ -214,10 +214,11 @@
             this.flowLayoutPanel4.Controls.Add(this.label3);
             this.flowLayoutPanel4.Controls.Add(this.styleComboBox);
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(161, 101);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(155, 104);
+            this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Padding = new System.Windows.Forms.Padding(3);
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(231, 35);
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(237, 35);
             this.flowLayoutPanel4.TabIndex = 3;
             // 
             // label3
@@ -225,10 +226,11 @@
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Left;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.label3.Location = new System.Drawing.Point(6, 6);
-            this.label3.Margin = new System.Windows.Forms.Padding(3);
+            this.label3.Location = new System.Drawing.Point(6, 9);
+            this.label3.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 23);
+            this.label3.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.label3.Size = new System.Drawing.Size(95, 20);
             this.label3.TabIndex = 8;
             this.label3.Text = "Stretching style:";
             // 
@@ -244,7 +246,8 @@
             "Center",
             "Center Fit",
             "Tile"});
-            this.styleComboBox.Location = new System.Drawing.Point(104, 6);
+            this.styleComboBox.Location = new System.Drawing.Point(107, 6);
+            this.styleComboBox.Margin = new System.Windows.Forms.Padding(3, 3, 6, 3);
             this.styleComboBox.Name = "styleComboBox";
             this.styleComboBox.Size = new System.Drawing.Size(121, 23);
             this.styleComboBox.TabIndex = 7;
