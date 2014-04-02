@@ -66,6 +66,11 @@ namespace Curator.Utils
 
         public List<string> SelectedWallpaperLocations
         {
+            get
+            {
+                return _selectedWallpaperLocations;
+            }
+
             set
             {
                 _selectedWallpaperLocations = value;
@@ -81,6 +86,14 @@ namespace Curator.Utils
                 }
 
                 ShuffleWallpaperImages();
+            }
+        }
+
+        public List<string> WallpaperImagePaths
+        {
+            get
+            {
+                return this._wallpaperImagePaths;
             }
         }
 

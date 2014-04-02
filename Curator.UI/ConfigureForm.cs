@@ -152,6 +152,18 @@ namespace Curator.UI
                 if (!_configManager.WallpaperLocations.Contains(folderBrowserDialog.SelectedPath))
                 {
                     _configManager.WallpaperLocations.Add(folderBrowserDialog.SelectedPath);
+                    Curator.Utils.WallpaperChanger.GetInstance.SelectedWallpaperLocations.Add(folderBrowserDialog.SelectedPath);
+
+                    var filters = new String[] { "jpg", "jpeg", "png", "gif", "tiff", "bmp" };
+                    foreach (var filter in filters)
+                    {
+                        foreach (var path in Curator.Utils.WallpaperChanger.GetInstance.SelectedWallpaperLocations)
+                        {
+                            Curator.Utils.WallpaperChanger.GetInstance.WallpaperImagePaths.AddRange(System.IO.Directory.GetFiles(path, String.Format("*.{0}", filter), System.IO.SearchOption.AllDirectories));
+                        }
+                    }
+
+                    Curator.Utils.WallpaperChanger.GetInstance.ShuffleWallpaperImages();
                 }
             }
 
