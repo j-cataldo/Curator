@@ -75,7 +75,7 @@ namespace Curator.UI
             }
 
             _configManager.StretchStyle = style;
-            
+
         }
 
         private void ConfigureForm_Load(object sender, EventArgs e)
@@ -84,7 +84,7 @@ namespace Curator.UI
 
             styleComboBox.SelectedIndex = (int)_configManager.StretchStyle;
             selectedTimeUnits.SelectedIndex = 0;
-            timeIntervalInput.Text = Convert.ToString(interval/1000);
+            timeIntervalInput.Text = Convert.ToString(interval / 1000);
 
             applyButton.Enabled = false;
         }

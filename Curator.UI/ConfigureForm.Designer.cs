@@ -33,10 +33,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.imagePreview = new System.Windows.Forms.PictureBox();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.selectedTimeUnits = new System.Windows.Forms.ComboBox();
-            this.timeIntervalInput = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -63,16 +59,25 @@
             this.aboutDesktopCuratorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.styleComboBox = new System.Windows.Forms.ComboBox();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.selectedTimeUnits = new System.Windows.Forms.ComboBox();
+            this.timeIntervalInput = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imagePreview)).BeginInit();
-            this.flowLayoutPanel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.menuStrip.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
+            this.flowLayoutPanel3.SuspendLayout();
+            this.flowLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -85,7 +90,6 @@
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.menuStrip, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.styleComboBox, 0, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
@@ -137,62 +141,6 @@
             this.imagePreview.Size = new System.Drawing.Size(320, 180);
             this.imagePreview.TabIndex = 0;
             this.imagePreview.TabStop = false;
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.AutoSize = true;
-            this.flowLayoutPanel2.Controls.Add(this.selectedTimeUnits);
-            this.flowLayoutPanel2.Controls.Add(this.timeIntervalInput);
-            this.flowLayoutPanel2.Controls.Add(this.label2);
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(329, 148);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(3);
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(440, 35);
-            this.flowLayoutPanel2.TabIndex = 1;
-            // 
-            // selectedTimeUnits
-            // 
-            this.selectedTimeUnits.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.selectedTimeUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.selectedTimeUnits.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.selectedTimeUnits.FormattingEnabled = true;
-            this.selectedTimeUnits.Items.AddRange(new object[] {
-            "Seconds",
-            "Minutes",
-            "Hours",
-            "Days"});
-            this.selectedTimeUnits.Location = new System.Drawing.Point(310, 6);
-            this.selectedTimeUnits.Name = "selectedTimeUnits";
-            this.selectedTimeUnits.Size = new System.Drawing.Size(121, 23);
-            this.selectedTimeUnits.TabIndex = 3;
-            this.selectedTimeUnits.SelectedIndexChanged += new System.EventHandler(this.selectedTimeUnits_SelectedIndexChanged);
-            // 
-            // timeIntervalInput
-            // 
-            this.timeIntervalInput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.timeIntervalInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.timeIntervalInput.Location = new System.Drawing.Point(201, 7);
-            this.timeIntervalInput.Margin = new System.Windows.Forms.Padding(3, 4, 6, 3);
-            this.timeIntervalInput.Name = "timeIntervalInput";
-            this.timeIntervalInput.Size = new System.Drawing.Size(100, 21);
-            this.timeIntervalInput.TabIndex = 2;
-            this.timeIntervalInput.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.timeIntervalInput.TextChanged += new System.EventHandler(this.timeIntervalInput_TextChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.label2.Location = new System.Drawing.Point(54, 6);
-            this.label2.Margin = new System.Windows.Forms.Padding(3);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(141, 23);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Change wallpaper every ";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox2
             // 
@@ -421,6 +369,7 @@
             // styleComboBox
             // 
             this.styleComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.styleComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.styleComboBox.FormattingEnabled = true;
             this.styleComboBox.Items.AddRange(new object[] {
             "Fill",
@@ -429,11 +378,101 @@
             "Center",
             "Center Fit",
             "Tile"});
-            this.styleComboBox.Location = new System.Drawing.Point(3, 526);
+            this.styleComboBox.Location = new System.Drawing.Point(104, 6);
             this.styleComboBox.Name = "styleComboBox";
-            this.styleComboBox.Size = new System.Drawing.Size(121, 21);
+            this.styleComboBox.Size = new System.Drawing.Size(121, 23);
             this.styleComboBox.TabIndex = 7;
             this.styleComboBox.SelectedIndexChanged += new System.EventHandler(this.styleComboBox_SelectedIndexChanged);
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.AutoSize = true;
+            this.flowLayoutPanel2.Controls.Add(this.flowLayoutPanel3);
+            this.flowLayoutPanel2.Controls.Add(this.flowLayoutPanel4);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(374, 3);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(395, 180);
+            this.flowLayoutPanel2.TabIndex = 1;
+            // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.AutoSize = true;
+            this.flowLayoutPanel3.Controls.Add(this.selectedTimeUnits);
+            this.flowLayoutPanel3.Controls.Add(this.timeIntervalInput);
+            this.flowLayoutPanel3.Controls.Add(this.label2);
+            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 142);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Padding = new System.Windows.Forms.Padding(3);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(389, 35);
+            this.flowLayoutPanel3.TabIndex = 2;
+            // 
+            // selectedTimeUnits
+            // 
+            this.selectedTimeUnits.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.selectedTimeUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.selectedTimeUnits.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.selectedTimeUnits.FormattingEnabled = true;
+            this.selectedTimeUnits.Items.AddRange(new object[] {
+            "Seconds",
+            "Minutes",
+            "Hours",
+            "Days"});
+            this.selectedTimeUnits.Location = new System.Drawing.Point(259, 6);
+            this.selectedTimeUnits.Name = "selectedTimeUnits";
+            this.selectedTimeUnits.Size = new System.Drawing.Size(121, 23);
+            this.selectedTimeUnits.TabIndex = 3;
+            // 
+            // timeIntervalInput
+            // 
+            this.timeIntervalInput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.timeIntervalInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.timeIntervalInput.Location = new System.Drawing.Point(150, 7);
+            this.timeIntervalInput.Margin = new System.Windows.Forms.Padding(3, 4, 6, 3);
+            this.timeIntervalInput.Name = "timeIntervalInput";
+            this.timeIntervalInput.Size = new System.Drawing.Size(100, 21);
+            this.timeIntervalInput.TabIndex = 2;
+            this.timeIntervalInput.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label2.Location = new System.Drawing.Point(3, 6);
+            this.label2.Margin = new System.Windows.Forms.Padding(3);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(141, 23);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Change wallpaper every ";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // flowLayoutPanel4
+            // 
+            this.flowLayoutPanel4.AutoSize = true;
+            this.flowLayoutPanel4.Controls.Add(this.label3);
+            this.flowLayoutPanel4.Controls.Add(this.styleComboBox);
+            this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(161, 103);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Padding = new System.Windows.Forms.Padding(3);
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(231, 33);
+            this.flowLayoutPanel4.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label3.Location = new System.Drawing.Point(6, 6);
+            this.label3.Margin = new System.Windows.Forms.Padding(3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(92, 21);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Stretching style:";
             // 
             // ConfigureForm
             // 
@@ -456,8 +495,6 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imagePreview)).EndInit();
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel2.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -465,6 +502,12 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
+            this.flowLayoutPanel3.ResumeLayout(false);
+            this.flowLayoutPanel3.PerformLayout();
+            this.flowLayoutPanel4.ResumeLayout(false);
+            this.flowLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -498,13 +541,16 @@
         private System.Windows.Forms.ToolStripMenuItem exportConfigurationAsToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.PictureBox imagePreview;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox timeIntervalInput;
-        private System.Windows.Forms.ComboBox selectedTimeUnits;
         private System.Windows.Forms.Button browseButton;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.ComboBox styleComboBox;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private System.Windows.Forms.ComboBox selectedTimeUnits;
+        private System.Windows.Forms.TextBox timeIntervalInput;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
+        private System.Windows.Forms.Label label3;
 
     }
 }
