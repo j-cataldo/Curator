@@ -131,35 +131,23 @@ namespace Curator.Utils
 
         private void ResizeAndSetWallpaperWithRetry(string path)
         {
-            try
+            var attempts = 0;
+
+            while (attempts < 5)
             {
-                ResizeAndSaveTempWallpaper(path, Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Curator\temp"));
-                SetWallpaperUsingActiveDesktop(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Curator\temp\temp.bmp"));
-            }
-            catch (IOException)
-            {
-                Console.WriteLine("DEBUG::ResizeAndSetWallpaperWithRetry failed attempt 1...");
-                System.Threading.Thread.Sleep(1000);
                 try
                 {
                     ResizeAndSaveTempWallpaper(path, Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Curator\temp"));
                     SetWallpaperUsingActiveDesktop(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Curator\temp\temp.bmp"));
+                    break;
                 }
+
                 catch (IOException)
                 {
-                    Console.WriteLine("DEBUG::ResizeAndSetWallpaperWithRetry failed attempt 2...");
-                    System.Threading.Thread.Sleep(2000);
-                    try
-                    {
-                        ResizeAndSaveTempWallpaper(path, Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Curator\temp"));
-                        SetWallpaperUsingActiveDesktop(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Curator\temp\temp.bmp"));
-                    }
-                    catch (IOException)
-                    {
-                        Console.WriteLine("DEBUG::ResizeAndSetWallpaperWithRetry failed attempt 3. Giving up...");
-                        Console.WriteLine("DEBUG::Uncaught Error Count: " + ++uncaughtErrors);
-                    }
+                    Console.WriteLine("DEBUG::ResizeAndSetWallpaperWithRetry failed attempt {0}...", ++attempts);
+                    System.Threading.Thread.Sleep((attempts)*250);
                 }
+
             }
         }
 
