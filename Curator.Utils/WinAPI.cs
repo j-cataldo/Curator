@@ -27,8 +27,8 @@ namespace Curator.Utils
 
         [DllImport("user32.dll")]
         public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vk);
-        //[DllImport("user32.dll")]
-        //public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+        [DllImport("user32.dll")]
+        public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
         [Flags]
         public enum AD_Apply : int

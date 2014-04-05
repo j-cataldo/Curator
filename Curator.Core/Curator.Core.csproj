@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="ApplicationManager.cs" />
     <Compile Include="ConfigManager.cs" />
+    <Compile Include="HotKeyManager.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
