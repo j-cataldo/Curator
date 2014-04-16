@@ -24,6 +24,7 @@ namespace Curator.Utils
             Graphics g = Graphics.FromImage(result);
 
             // draw img2 to right side of img1
+            g.DrawImage(img1, 0, 0);
             g.DrawImage(img2, img1.Width, 0);
 
             // return image

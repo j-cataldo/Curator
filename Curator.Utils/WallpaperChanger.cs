@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using Microsoft.Win32;
 
 namespace Curator.Utils
 {
@@ -108,9 +109,24 @@ namespace Curator.Utils
             // on each screen. This code should be refactored with the same code in SetPreviousWallpaper
             if (Screen.AllScreens.Length > 1)
             {
+                // skips over a wallpaper so when two monitors are used both wallpapers are refreshed
+                // in the future this should be modified to change depending on number of monitors
+                // such that each monitor changes its wallpaper every time.
+                if (++_currentWallpaperIndex >= _wallpaperImagePaths.Count)
+                {
+                    _currentWallpaperIndex = 0;
+                }
                 int num_monitors = Screen.AllScreens.Length;
                 int index = _currentWallpaperIndex;
                 Bitmap img_cat = new Bitmap(_wallpaperImagePaths[_currentWallpaperIndex]);
+
+                // Multi-monitor support works only if the windows default style variable is set to tiled
+
+                RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true);
+
+                key.SetValue(@"WallpaperStyle", 0.ToString());
+                key.SetValue(@"TileWallpaper", 1.ToString());
+
                 for (int i = 0; i < num_monitors; i++)
                 {
                     if (++index >= _wallpaperImagePaths.Count)
@@ -182,9 +198,24 @@ namespace Curator.Utils
 
             if (Screen.AllScreens.Length > 1)
             {
+                // skips over a wallpaper so when two monitors are used both wallpapers are refreshed
+                // in the future this should be modified to change depending on number of monitors
+                // such that each monitor changes its wallpaper every time.
+                if (--_currentWallpaperIndex < 0)
+                {
+                    _currentWallpaperIndex = _wallpaperImagePaths.Count - 1;
+                }
                 int num_monitors = Screen.AllScreens.Length;
                 int index = _currentWallpaperIndex;
                 Bitmap img_cat = new Bitmap(_wallpaperImagePaths[_currentWallpaperIndex]);
+               
+                // Multi-monitor support works only if the windows default style variable is set to tiled
+
+                RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true);
+
+                key.SetValue(@"WallpaperStyle", 0.ToString());
+                key.SetValue(@"TileWallpaper", 1.ToString());
+
                 for (int i = 0; i < num_monitors-1; i++)
                 {
                     if (++index >= _wallpaperImagePaths.Count)
