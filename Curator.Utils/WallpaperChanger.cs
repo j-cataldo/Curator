@@ -102,8 +102,69 @@ namespace Curator.Utils
             {
                 _currentWallpaperIndex = 0;
             }
+            
+            // This if statement is to allow multi monitor support. What this means is if more than 1 screen
+            // is detected then several images will be concatenated such that a different image appears
+            // on each screen. This code should be refactored with the same code in SetPreviousWallpaper
+            if (Screen.AllScreens.Length > 1)
+            {
+                int num_monitors = Screen.AllScreens.Length;
+                int index = _currentWallpaperIndex;
+                Bitmap img_cat = new Bitmap(_wallpaperImagePaths[_currentWallpaperIndex]);
+                for (int i = 0; i < num_monitors; i++)
+                {
+                    if (++index >= _wallpaperImagePaths.Count)
+                    {
+                        index = 0;
+                    }
 
-            ResizeAndSetWallpaperWithRetry(_wallpaperImagePaths[_currentWallpaperIndex]);
+                    Bitmap img_tmp = new Bitmap(_wallpaperImagePaths[index]);
+
+                    switch (this.StretchStyle)
+                    {
+                        case StretchStyles.Fill:
+                            ImageResizer.Fill(ref img_tmp, Screen.AllScreens[i].Bounds.Height, Screen.AllScreens[i].Bounds.Width);
+                            break;
+                        case StretchStyles.Fit:
+                            ImageResizer.Fit(ref img_tmp, Screen.AllScreens[i].Bounds.Height, Screen.AllScreens[i].Bounds.Width);
+                            break;
+                        case StretchStyles.Stretch:
+                            ImageResizer.Stretch(ref img_tmp, Screen.AllScreens[i].Bounds.Height, Screen.AllScreens[i].Bounds.Width);
+                            break;
+                        case StretchStyles.Center:
+                            ImageResizer.Center(ref img_tmp, Screen.AllScreens[i].Bounds.Height, Screen.AllScreens[i].Bounds.Width);
+                            break;
+                        case StretchStyles.CenterFit:
+                            ImageResizer.CenterFit(ref img_tmp, Screen.AllScreens[i].Bounds.Height, Screen.AllScreens[i].Bounds.Width);
+                            break;
+                        case StretchStyles.Tile:
+                            ImageResizer.Tile(ref img_tmp, Screen.AllScreens[i].Bounds.Height, Screen.AllScreens[i].Bounds.Width);
+                            break;
+                        default:
+                            ImageResizer.Fill(ref img_tmp, Screen.AllScreens[i].Bounds.Height, Screen.AllScreens[i].Bounds.Width);
+                            break;
+
+                    }
+
+                    if(i==0)
+                    {
+                        img_cat = new Bitmap(img_tmp);
+                    }
+                    else
+                    {
+                        img_cat = ImageCat.Cat(img_cat, img_tmp);
+                    }
+                }
+                string multi_path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Curator\temp\temp_multi.bmp");
+                img_cat.Save(multi_path);
+                SetWallpaperUsingActiveDesktop(multi_path);
+            }
+            else
+            {
+                // This is run when only 1 monitor is detected.
+                ResizeAndSetWallpaperWithRetry(_wallpaperImagePaths[_currentWallpaperIndex]);
+            }
+
 
             if (SlideshowTimer.GetInstance.Enabled)
             {
@@ -119,7 +180,56 @@ namespace Curator.Utils
                 _currentWallpaperIndex = _wallpaperImagePaths.Count - 1;
             }
 
-            ResizeAndSetWallpaperWithRetry(_wallpaperImagePaths[_currentWallpaperIndex]);
+            if (Screen.AllScreens.Length > 1)
+            {
+                int num_monitors = Screen.AllScreens.Length;
+                int index = _currentWallpaperIndex;
+                Bitmap img_cat = new Bitmap(_wallpaperImagePaths[_currentWallpaperIndex]);
+                for (int i = 0; i < num_monitors-1; i++)
+                {
+                    if (++index >= _wallpaperImagePaths.Count)
+                    {
+                        index = 0;
+                    }
+
+                    Bitmap img_tmp = new Bitmap(new Bitmap(_wallpaperImagePaths[index]));
+
+                    switch (this.StretchStyle)
+                    {
+                        case StretchStyles.Fill:
+                            ImageResizer.Fill(ref img_tmp, Screen.AllScreens[i].Bounds.Height, Screen.AllScreens[i].Bounds.Width);
+                            break;
+                        case StretchStyles.Fit:
+                            ImageResizer.Fit(ref img_tmp, Screen.AllScreens[i].Bounds.Height, Screen.AllScreens[i].Bounds.Width);
+                            break;
+                        case StretchStyles.Stretch:
+                            ImageResizer.Stretch(ref img_tmp, Screen.AllScreens[i].Bounds.Height, Screen.AllScreens[i].Bounds.Width);
+                            break;
+                        case StretchStyles.Center:
+                            ImageResizer.Center(ref img_tmp, Screen.AllScreens[i].Bounds.Height, Screen.AllScreens[i].Bounds.Width);
+                            break;
+                        case StretchStyles.CenterFit:
+                            ImageResizer.CenterFit(ref img_tmp, Screen.AllScreens[i].Bounds.Height, Screen.AllScreens[i].Bounds.Width);
+                            break;
+                        case StretchStyles.Tile:
+                            ImageResizer.Tile(ref img_tmp, Screen.AllScreens[i].Bounds.Height, Screen.AllScreens[i].Bounds.Width);
+                            break;
+                        default:
+                            ImageResizer.Fill(ref img_tmp, Screen.AllScreens[i].Bounds.Height, Screen.AllScreens[i].Bounds.Width);
+                            break;
+
+                    }
+
+                    img_cat = ImageCat.Cat(img_cat, img_tmp);
+                }
+                string multi_path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Curator\temp\temp_multi.bmp");
+                img_cat.Save(multi_path);
+                SetWallpaperUsingActiveDesktop(multi_path);
+            }
+            else
+            {
+                ResizeAndSetWallpaperWithRetry(_wallpaperImagePaths[_currentWallpaperIndex]);
+            }
 
             if (SlideshowTimer.GetInstance.Enabled)
             {

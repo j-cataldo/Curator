@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IConfigManager.cs" />
+    <Compile Include="ImageCat.cs" />
     <Compile Include="ImageResizer.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
