@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,8 +25,11 @@ namespace Curator.UI
         {
             int interval = Convert.ToInt32(timeIntervalInput.Text);
             int scaleFactor;
-
             int index = selectedTimeUnits.SelectedIndex;
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Curator\temp\settings.txt");
+            string styles = "fill";
+            List<string> papers = _configManager.WallpaperLocations;
+
             switch (index)
             {
                 case 0:
@@ -44,8 +48,8 @@ namespace Curator.UI
                     scaleFactor = 1000;
                     break;
             }
-
-            _configManager.Interval = interval * scaleFactor;
+            interval = interval * scaleFactor;
+            _configManager.Interval = interval;
 
             index = styleComboBox.SelectedIndex;
             Curator.Utils.StretchStyles style;
@@ -53,28 +57,59 @@ namespace Curator.UI
             {
                 case 0:
                     style = Curator.Utils.StretchStyles.Fill;
+                    styles = "fill";
                     break;
                 case 1:
                     style = Curator.Utils.StretchStyles.Fit;
+                    styles = "fit";
                     break;
                 case 2:
                     style = Curator.Utils.StretchStyles.Stretch;
+                    styles = "stretch";
                     break;
                 case 3:
                     style = Curator.Utils.StretchStyles.Center;
+                    styles = "center";
                     break;
                 case 4:
                     style = Curator.Utils.StretchStyles.CenterFit;
+                    styles = "centerfit";
                     break;
                 case 5:
                     style = Curator.Utils.StretchStyles.Tile;
+                    styles = "tile";
                     break;
                 default:
                     style = Curator.Utils.StretchStyles.Fill;
+                    styles = "fill";
                     break;
             }
 
+
+           //output to file here
+            // create settings file and put info into it. 
+            using (FileStream file = File.Create(path))
+            {
+                string settings = interval.ToString();
+                settings += "\n";
+                settings += style;
+                foreach (var loc in papers)
+                {
+                    settings += "\n";
+                    settings += loc;
+                    //Wallpaper locations go here 
+                }
+
+                Byte[] info = new UTF8Encoding(true).GetBytes(settings);
+                // Add some information to the file.
+                file.Write(info, 0, info.Length);
+                file.Flush();
+            }
+
             _configManager.StretchStyle = style;
+
+            
+
 
         }
 

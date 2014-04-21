@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -9,105 +10,160 @@ using System.Windows.Forms;
 
 namespace Curator.Core
 {
-    public class ConfigManager : Curator.Utils.IConfigManager
-    {
-        /// <summary>
-        /// Another singleton class. Manages configuration settings, in memory for now.
-        /// </summary>
-
-        private static ConfigManager _configManagerInstance;
-        private static readonly object _configManagerInstanceSync = new object(); // In case we want to multithread later
-
-        private int _interval;
-        private List<string> _wallpaperLocations;
-        private Curator.Utils.StretchStyles _stretchStyle;
-
-        private Curator.UI.ConfigureForm _configureForm;
-
-        private ConfigManager()
+        public class ConfigManager : Curator.Utils.IConfigManager
         {
-            this._interval = 15000;
-            this._wallpaperLocations = new List<string>() { System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures) };
-            this._stretchStyle = Curator.Utils.StretchStyles.Stretch;
-        }
+            /// <summary>
+            /// Another singleton class. Manages configuration settings, in memory for now.
+            /// </summary>
 
-        public static ConfigManager GetInstance
-        {
-            get
+            private static ConfigManager _configManagerInstance;
+            private static readonly object _configManagerInstanceSync = new object(); // In case we want to multithread later
+
+            private int _interval;
+            private List<string> _wallpaperLocations;
+            private Curator.Utils.StretchStyles _stretchStyle;
+
+            private Curator.UI.ConfigureForm _configureForm;
+
+            private ConfigManager() // sets initial settings of applicatoin
             {
-                if (_configManagerInstance == null)
+                string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Curator\temp\settings.txt");
+                this._wallpaperLocations = new List<string>();
+
+                // teting file loading.  
+                if (File.Exists(path))
                 {
-                    lock (_configManagerInstanceSync)
+                    using (StreamReader sr = File.OpenText(path))
                     {
-                        if (_configManagerInstance == null)
+                        string stat = "";
+                        // intervals
+                        stat = sr.ReadLine();
+                        _interval = Convert.ToInt32(stat);
+                        //for style types
+                        stat = sr.ReadLine();
+                        int same = String.Compare(stat, "fill");
+                        bool found = false;
+                        if (same == 0) { _stretchStyle = Curator.Utils.StretchStyles.Fill; found = true; }
+                        same = String.Compare(stat, "fit");
+                        if (same == 0) { _stretchStyle = Curator.Utils.StretchStyles.Fit; found = true; }
+                        same = String.Compare(stat, "stretch");
+                        if (same == 0) { _stretchStyle = Curator.Utils.StretchStyles.Stretch; found = true; }
+                        same = String.Compare(stat, "center");
+                        if (same == 0) { _stretchStyle = Curator.Utils.StretchStyles.Center; found = true; }
+                        same = String.Compare(stat, "centerfit");
+                        if (same == 0) { _stretchStyle = Curator.Utils.StretchStyles.CenterFit; found = true; }
+                        same = String.Compare(stat, "tile");
+                        if (same == 0) { _stretchStyle = Curator.Utils.StretchStyles.Tile; found = true; }
+                        if (found == false) { _stretchStyle = Curator.Utils.StretchStyles.Stretch; }
+                        // directory _wallpaperLocations list
+                        if ((stat = sr.ReadLine()) != null) // check for directory informaion
                         {
-                            _configManagerInstance = new ConfigManager();
+                            _wallpaperLocations.Add(stat);
                         }
+
+                        else // set default location if not found. 
+                        {
+                            _wallpaperLocations.Add(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures));
+                        }
+
+                        while ((stat = sr.ReadLine()) != null)
+                        {
+                            _wallpaperLocations.Add(stat);
+                        }
+
                     }
                 }
 
-                return _configManagerInstance;
-            }
-        }
+                else
+                {
+                    this._interval = 15000;
+                    this._wallpaperLocations.Add(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures));
+                    this._stretchStyle = Curator.Utils.StretchStyles.Stretch;
+                }
 
-        public Curator.UI.ConfigureForm ConfigureForm
-        {
-            get
-            {
-                return this._configureForm;
-            }
-            set
-            {
-                this._configureForm = value;
-            }
-        }
+                
+                
 
-        public void showConfigureForm()
-        {
-            if (this._configureForm == null || !this._configureForm.Visible)
+                }
+                          
+            
+            public static ConfigManager GetInstance
             {
-                this._configureForm.ShowDialog();
-            }
-        }
+                get
+                {
+                    if (_configManagerInstance == null)
+                    {
+                        lock (_configManagerInstanceSync)
+                        {
+                            if (_configManagerInstance == null)
+                            {
+                                _configManagerInstance = new ConfigManager();
+                            }
+                        }
+                    }
 
-        public int Interval
-        {
-            get
-            {
-                return this._interval;
+                    return _configManagerInstance;
+                }
             }
-            set
-            {
-                this._interval = value;
-                Curator.Utils.SlideshowTimer.GetInstance.Interval = this._interval;
-            }
-        }
 
-        public List<string> WallpaperLocations
-        {
-            get
+            public Curator.UI.ConfigureForm ConfigureForm
             {
-                return this._wallpaperLocations;
+                get
+                {
+                    return this._configureForm;
+                }
+                set
+                {
+                    this._configureForm = value;
+                }
             }
-            set
-            {
-                this._wallpaperLocations = value;
-                Curator.Utils.WallpaperChanger.GetInstance.SelectedWallpaperLocations = this._wallpaperLocations;
-            }
-        }
 
-        public Curator.Utils.StretchStyles StretchStyle
-        {
-            get
+            public void showConfigureForm()
             {
-                return this._stretchStyle;
+                if (this._configureForm == null || !this._configureForm.Visible)
+                {
+                    this._configureForm.ShowDialog();
+                }
             }
-            set
-            {
-                this._stretchStyle = value;
-                Curator.Utils.WallpaperChanger.GetInstance.StretchStyle = this._stretchStyle;
-            }
-        }
 
+            public int Interval
+            {
+                get
+                {
+                    return this._interval;
+                }
+                set
+                {
+                    this._interval = value;
+                    Curator.Utils.SlideshowTimer.GetInstance.Interval = this._interval;
+                }
+            }
+
+            public List<string> WallpaperLocations
+            {
+                get
+                {
+                    return this._wallpaperLocations;
+                }
+                set
+                {
+                    this._wallpaperLocations = value;
+                    Curator.Utils.WallpaperChanger.GetInstance.SelectedWallpaperLocations = this._wallpaperLocations;
+                }
+            }
+
+            public Curator.Utils.StretchStyles StretchStyle
+            {
+                get
+                {
+                    return this._stretchStyle;
+                }
+                set
+                {
+                    this._stretchStyle = value;
+                    Curator.Utils.WallpaperChanger.GetInstance.StretchStyle = this._stretchStyle;
+                }
+            }
+
+        }
     }
-}
