@@ -145,7 +145,7 @@ namespace Curator.Utils
                 catch (IOException)
                 {
                     Console.WriteLine("DEBUG::ResizeAndSetWallpaperWithRetry failed attempt {0}...", ++attempts);
-                    System.Threading.Thread.Sleep(250);
+                    System.Threading.Thread.Sleep(150);
                 }
 
             }
