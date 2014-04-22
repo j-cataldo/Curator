@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,11 +8,53 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Curator.UI
 {
     public partial class ConfigureForm : Form
     {
+        public static DialogResult InputBox(string title, string promptText, ref string value)
+        {
+            Form form = new Form();
+            Label label = new Label();
+            TextBox textBox = new TextBox();
+            Button buttonOk = new Button();
+            Button buttonCancel = new Button();
+
+            form.Text = title;
+            label.Text = promptText;
+            textBox.Text = value;
+
+            buttonOk.Text = "OK";
+            buttonCancel.Text = "Cancel";
+            buttonOk.DialogResult = DialogResult.OK;
+            buttonCancel.DialogResult = DialogResult.Cancel;
+
+            label.SetBounds(9, 20, 372, 13);
+            textBox.SetBounds(12, 36, 372, 20);
+            buttonOk.SetBounds(228, 72, 75, 23);
+            buttonCancel.SetBounds(309, 72, 75, 23);
+
+            label.AutoSize = true;
+            textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
+            buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+
+            form.ClientSize = new Size(396, 107);
+            form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
+            form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
+            form.FormBorderStyle = FormBorderStyle.FixedDialog;
+            form.StartPosition = FormStartPosition.CenterScreen;
+            form.MinimizeBox = false;
+            form.MaximizeBox = false;
+            form.AcceptButton = buttonOk;
+            form.CancelButton = buttonCancel;
+
+            DialogResult dialogResult = form.ShowDialog();
+            value = textBox.Text;
+            return dialogResult;
+        }
         private Curator.Utils.IConfigManager _configManager;
 
         public ConfigureForm(Curator.Utils.IConfigManager configManager)
@@ -24,8 +67,11 @@ namespace Curator.UI
         {
             int interval = Convert.ToInt32(timeIntervalInput.Text);
             int scaleFactor;
-
             int index = selectedTimeUnits.SelectedIndex;
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Curator\temp\settings.txt");
+            string styles = "fill";
+            List<string> papers = _configManager.WallpaperLocations;
+
             switch (index)
             {
                 case 0:
@@ -44,8 +90,8 @@ namespace Curator.UI
                     scaleFactor = 1000;
                     break;
             }
-
-            _configManager.Interval = interval * scaleFactor;
+            interval = interval * scaleFactor;
+            _configManager.Interval = interval;
 
             index = styleComboBox.SelectedIndex;
             Curator.Utils.StretchStyles style;
@@ -53,28 +99,59 @@ namespace Curator.UI
             {
                 case 0:
                     style = Curator.Utils.StretchStyles.Fill;
+                    styles = "fill";
                     break;
                 case 1:
                     style = Curator.Utils.StretchStyles.Fit;
+                    styles = "fit";
                     break;
                 case 2:
                     style = Curator.Utils.StretchStyles.Stretch;
+                    styles = "stretch";
                     break;
                 case 3:
                     style = Curator.Utils.StretchStyles.Center;
+                    styles = "center";
                     break;
                 case 4:
                     style = Curator.Utils.StretchStyles.CenterFit;
+                    styles = "centerfit";
                     break;
                 case 5:
                     style = Curator.Utils.StretchStyles.Tile;
+                    styles = "tile";
                     break;
                 default:
                     style = Curator.Utils.StretchStyles.Fill;
+                    styles = "fill";
                     break;
             }
 
+
+           //output to file here
+            // create settings file and put info into it. 
+            using (FileStream file = File.Create(path))
+            {
+                string settings = interval.ToString();
+                settings += "\n";
+                settings += style;
+                foreach (var loc in papers)
+                {
+                    settings += "\n";
+                    settings += loc;
+                    //Wallpaper locations go here 
+                }
+
+                Byte[] info = new UTF8Encoding(true).GetBytes(settings);
+                // Add some information to the file.
+                file.Write(info, 0, info.Length);
+                file.Flush();
+            }
+
             _configManager.StretchStyle = style;
+
+            
+
 
         }
 
@@ -205,6 +282,43 @@ namespace Curator.UI
         private void timeIntervalInput_TextChanged_1(object sender, EventArgs e)
         {
             timeIntervalInput_TextChanged(sender, e);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string value = "Document 1";
+            
+            if (InputBox("New document", "New document name:", ref value) == DialogResult.OK)
+            {
+                String path = Directory.GetCurrentDirectory();
+                System.IO.Directory.CreateDirectory(value);
+                path += "\\";
+                path += value;
+                _configManager.subreddits += value;
+                _configManager.subreddits += " ";
+                _configManager.WallpaperLocations.Add(path);
+                Curator.Utils.WallpaperChanger.GetInstance.SelectedWallpaperLocations.Add(path);
+
+                ProcessStartInfo start = new ProcessStartInfo("python");
+                start.WorkingDirectory = Directory.GetCurrentDirectory();
+                start.Arguments = "reddit_script.py " + _configManager.subreddits;
+                start.UseShellExecute = false;
+                start.CreateNoWindow = true;
+                start.RedirectStandardOutput = true;
+                start.RedirectStandardError = true;
+                Process process = new Process();
+                process.StartInfo = start;
+                process.Start();
+
+                Curator.Utils.WallpaperChanger.GetInstance.WallpaperImagePaths.AddRange(System.IO.Directory.GetFiles(path));
+            }
+
+            PopulateImageSetTree();
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
         }
     }
 }

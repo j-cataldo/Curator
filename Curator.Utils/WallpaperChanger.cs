@@ -23,6 +23,7 @@ namespace Curator.Utils
         private StretchStyles _stretchStyle;
         private List<string> _selectedWallpaperLocations;
         private List<string> _wallpaperImagePaths;
+        
 
         private int _currentWallpaperIndex;
         private int uncaughtErrors;
