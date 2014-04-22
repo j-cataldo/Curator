@@ -21,6 +21,7 @@ namespace Curator.Core
 
             private int _interval;
             private List<string> _wallpaperLocations;
+            private string _subreddits;
             private Curator.Utils.StretchStyles _stretchStyle;
 
             private Curator.UI.ConfigureForm _configureForm;
@@ -29,7 +30,7 @@ namespace Curator.Core
             {
                 string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Curator\temp\settings.txt");
                 this._wallpaperLocations = new List<string>();
-
+                this._subreddits = "";
                 // teting file loading.  
                 if (File.Exists(path))
                 {
@@ -149,6 +150,19 @@ namespace Curator.Core
                 {
                     this._wallpaperLocations = value;
                     Curator.Utils.WallpaperChanger.GetInstance.SelectedWallpaperLocations = this._wallpaperLocations;
+                }
+            }
+
+            public string subreddits
+            {
+                get
+                {
+                    return this._subreddits;
+                }
+                set
+                {
+                    this._subreddits = value;
+                    
                 }
             }
 

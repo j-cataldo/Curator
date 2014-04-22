@@ -47,6 +47,8 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.browseButton = new System.Windows.Forms.Button();
             this.sourcesTreeView = new System.Windows.Forms.TreeView();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
@@ -300,11 +302,14 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 105F));
             this.tableLayoutPanel3.Controls.Add(this.browseButton, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.sourcesTreeView, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.button1, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.button2, 0, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(758, 229);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
@@ -312,7 +317,7 @@
             // 
             this.browseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.browseButton.AutoSize = true;
-            this.browseButton.Location = new System.Drawing.Point(656, 203);
+            this.browseButton.Location = new System.Drawing.Point(656, 183);
             this.browseButton.Name = "browseButton";
             this.browseButton.Size = new System.Drawing.Size(99, 23);
             this.browseButton.TabIndex = 5;
@@ -325,8 +330,28 @@
             this.sourcesTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sourcesTreeView.Location = new System.Drawing.Point(3, 3);
             this.sourcesTreeView.Name = "sourcesTreeView";
-            this.sourcesTreeView.Size = new System.Drawing.Size(647, 223);
+            this.sourcesTreeView.Size = new System.Drawing.Size(647, 203);
             this.sourcesTreeView.TabIndex = 6;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(656, 212);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(99, 14);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(3, 212);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 14);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // tabPage2
             // 
@@ -586,6 +611,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button browseButton;
         private System.Windows.Forms.TreeView sourcesTreeView;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
 
     }
 }
