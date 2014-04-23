@@ -299,14 +299,14 @@ namespace Curator.UI
                 _configManager.WallpaperLocations.Add(path);
                 Curator.Utils.WallpaperChanger.GetInstance.SelectedWallpaperLocations.Add(path);
 
-                ProcessStartInfo start = new ProcessStartInfo("python");
+                ProcessStartInfo start = new ProcessStartInfo("C:\\Python27\\python.exe");
                 String script_path = Application.StartupPath;
                 script_path = script_path.Replace("\\Curator.Core\\bin\\Debug", "");
                 start.WorkingDirectory = script_path;
                 System.Diagnostics.Debug.WriteLine(script_path);
 
                 temp_path = temp_path.Replace("\\", "/");
-                System.Diagnostics.Debug.WriteLine(temp_path);
+                //System.Diagnostics.Debug.WriteLine(temp_path);
                 //start.Arguments = "reddit_script.py " + temp_path + " " + _configManager.subreddits;
                 start.Arguments = "reddit_script.py " + temp_path + " " + value;
                 start.UseShellExecute = false;
