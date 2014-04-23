@@ -36,7 +36,7 @@ namespace Curator.UI
 
             _notifyIcon = new NotifyIcon()
             {
-                Text = "Desktop Curator Alpha",
+                Text = "Desktop Curator Beta",
                 Icon = Properties.Resources.TrayIcon,
                 ContextMenuStrip = _contextMenu,
                 Visible = true,
