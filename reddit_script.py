@@ -77,8 +77,6 @@ def downloadRedditImages( subreddits, save_path ):
 def main():
 	if len( sys.argv ) > 2:
 		downloadRedditImages( sys.argv[2:], sys.argv[1] )
-	else:
-		downloadRedditImages( ['funny'] )
 		
 if __name__ == '__main__':
 	main()
