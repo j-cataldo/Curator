@@ -46,8 +46,10 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.sourcesTreeView = new System.Windows.Forms.TreeView();
-            this.button1 = new System.Windows.Forms.Button();
+            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.browseButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
@@ -69,8 +71,8 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutDesktopCuratorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
-            this.browseButton = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listBox2 = new System.Windows.Forms.ListBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -82,9 +84,11 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.flowLayoutPanel5.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.menuStrip.SuspendLayout();
-            this.flowLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -309,7 +313,7 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 229F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(758, 229);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
@@ -321,15 +325,17 @@
             this.sourcesTreeView.Size = new System.Drawing.Size(647, 223);
             this.sourcesTreeView.TabIndex = 6;
             // 
-            // button1
+            // flowLayoutPanel5
             // 
-            this.button1.Location = new System.Drawing.Point(3, 168);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(93, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Add Subreddit";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.flowLayoutPanel5.Controls.Add(this.button2);
+            this.flowLayoutPanel5.Controls.Add(this.button1);
+            this.flowLayoutPanel5.Controls.Add(this.browseButton);
+            this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel5.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(656, 3);
+            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(99, 223);
+            this.flowLayoutPanel5.TabIndex = 9;
             // 
             // button2
             // 
@@ -341,8 +347,30 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(3, 168);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(93, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "Add Subreddit";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // browseButton
+            // 
+            this.browseButton.AutoSize = true;
+            this.browseButton.Location = new System.Drawing.Point(3, 139);
+            this.browseButton.Name = "browseButton";
+            this.browseButton.Size = new System.Drawing.Size(93, 23);
+            this.browseButton.TabIndex = 6;
+            this.browseButton.Text = "Add Local";
+            this.browseButton.UseVisualStyleBackColor = true;
+            this.browseButton.Click += new System.EventHandler(this.browseButton_Click_2);
+            // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.listBox1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -353,6 +381,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.listBox2);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(764, 235);
@@ -519,28 +548,23 @@
             this.aboutDesktopCuratorToolStripMenuItem.Text = "&About Desktop Curator";
             this.aboutDesktopCuratorToolStripMenuItem.Click += new System.EventHandler(this.aboutDesktopCuratorToolStripMenuItem_Click);
             // 
-            // flowLayoutPanel5
+            // listBox1
             // 
-            this.flowLayoutPanel5.Controls.Add(this.button2);
-            this.flowLayoutPanel5.Controls.Add(this.button1);
-            this.flowLayoutPanel5.Controls.Add(this.browseButton);
-            this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel5.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(656, 3);
-            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(99, 223);
-            this.flowLayoutPanel5.TabIndex = 9;
+            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(3, 3);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(758, 229);
+            this.listBox1.TabIndex = 0;
             // 
-            // browseButton
+            // listBox2
             // 
-            this.browseButton.AutoSize = true;
-            this.browseButton.Location = new System.Drawing.Point(3, 139);
-            this.browseButton.Name = "browseButton";
-            this.browseButton.Size = new System.Drawing.Size(93, 23);
-            this.browseButton.TabIndex = 6;
-            this.browseButton.Text = "Add Local";
-            this.browseButton.UseVisualStyleBackColor = true;
-            this.browseButton.Click += new System.EventHandler(this.browseButton_Click_2);
+            this.listBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.Location = new System.Drawing.Point(0, 0);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(764, 235);
+            this.listBox2.TabIndex = 0;
             // 
             // ConfigureForm
             // 
@@ -573,11 +597,13 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
+            this.flowLayoutPanel5.ResumeLayout(false);
+            this.flowLayoutPanel5.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
-            this.flowLayoutPanel5.ResumeLayout(false);
-            this.flowLayoutPanel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -626,6 +652,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
         private System.Windows.Forms.Button browseButton;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listBox2;
 
     }
 }
