@@ -285,7 +285,7 @@ namespace Curator.UI
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            string value = "Document 1";
+            string value = "wallpapers";
 
             if (InputBox("New subreddit", "New subreddit name:", ref value) == DialogResult.OK)
             {
@@ -327,6 +327,15 @@ namespace Curator.UI
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if ( this.sourcesTreeView.SelectedNode != null)
+            {
+                this.sourcesTreeView.Nodes.Remove(this.sourcesTreeView.SelectedNode);
+            }
+        }
+
+        private void browseButton_Click_2(object sender, EventArgs e)
+        {
+            browseButton_Click_1(sender, e);
         }
     }
 }
