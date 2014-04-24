@@ -93,7 +93,7 @@ namespace Curator.UI
             {
                 string settings = interval.ToString();
                 settings += "\r\n";
-                settings += style;
+                settings += styles;
                 foreach (var loc in papers)
                 {
                     settings += "\r\n";
@@ -181,15 +181,14 @@ namespace Curator.UI
         }
 
         private void browseButton_Click(object sender, EventArgs e)
-        {
+        {// add local
             DialogResult result = folderBrowserDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
                 if (!_configManager.WallpaperLocations.Contains(folderBrowserDialog.SelectedPath))
                 {
                     _configManager.WallpaperLocations.Add(folderBrowserDialog.SelectedPath);
-                    Curator.Utils.WallpaperChanger.GetInstance.SelectedWallpaperLocations.Add(folderBrowserDialog.SelectedPath);
-
+                   
                     var filters = new String[] { "jpg", "jpeg", "png", "gif", "tiff", "bmp" };
                     foreach (var filter in filters)
                     {
@@ -229,7 +228,7 @@ namespace Curator.UI
         }
 
         private void browseButton_Click_1(object sender, EventArgs e)
-        {
+        {   //add local
             browseButton_Click(sender, e);
         }
 
@@ -326,16 +325,31 @@ namespace Curator.UI
         }
 
         private void button2_Click(object sender, EventArgs e)
-        {
+        {// remove source button
             if ( this.sourcesTreeView.SelectedNode != null)
             {
+                string xsource = this.sourcesTreeView.SelectedNode.Text;
+                List<String> temp = new List<string>();
+                int same = 0;
+                foreach (string source in _configManager.WallpaperLocations)
+                {
+                    same = String.Compare(source, xsource);
+                    if (same != 0) { temp.Add(source); }
+                }
+                _configManager.WallpaperLocations = temp;
                 this.sourcesTreeView.Nodes.Remove(this.sourcesTreeView.SelectedNode);
+                applyButton.Enabled = true;
             }
         }
 
         private void browseButton_Click_2(object sender, EventArgs e)
-        {
+        { // add local
             browseButton_Click_1(sender, e);
+        }
+
+        private void menuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }
