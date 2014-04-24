@@ -11,7 +11,7 @@ namespace Curator.Utils
         List<string> WallpaperLocations { get; set; }
         string subreddits { get; set; }
         Curator.Utils.StretchStyles StretchStyle { get; set; }
-
+     
         void showConfigureForm();
     }
 }

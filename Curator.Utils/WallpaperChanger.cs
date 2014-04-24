@@ -26,12 +26,10 @@ namespace Curator.Utils
         
 
         private int _currentWallpaperIndex;
-        private int uncaughtErrors;
 
         private WallpaperChanger()
         {
             _currentWallpaperIndex = 0;
-            uncaughtErrors = 0;
         }
 
         public static WallpaperChanger GetInstance
