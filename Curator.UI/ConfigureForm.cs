@@ -316,7 +316,9 @@ namespace Curator.UI
                 process.StartInfo = start;
                 process.Start();
                 process.WaitForExit();
+
                 Curator.Utils.WallpaperChanger.GetInstance.WallpaperImagePaths.AddRange(System.IO.Directory.GetFiles(path));
+                Curator.Utils.WallpaperChanger.GetInstance.ShuffleWallpaperImages();
                 System.Diagnostics.Debug.WriteLine("done");
             }
 
