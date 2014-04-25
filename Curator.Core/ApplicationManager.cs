@@ -6,6 +6,12 @@ using System.Windows.Forms;
 
 namespace Curator.Core
 {
+    /// <summary>
+    /// Main application context.
+    /// Manages other managers and UI elements.
+    /// Run by the main program runner in Program.cs
+    /// </summary>
+
     public class ApplicationManager : ApplicationContext
     {
         private readonly Curator.UI.TrayIcon _trayIcon;
@@ -33,6 +39,9 @@ namespace Curator.Core
 
         private void ApplicationExitHandler(object sender, EventArgs e)
         {
+            // Make sure we hide the tray icon automatically when the program exits
+            // Otherwise, the user will have to mouse over the icon before it disappears
+
             if (_trayIcon != null)
                 _trayIcon.Dispose();
         }

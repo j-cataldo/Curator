@@ -7,6 +7,11 @@ using System.Windows.Forms;
 
 namespace Curator.UI
 {
+    /// <summary>
+    /// Notification tray icon implementation. 
+    /// Contains self event handlers and those for right-click context menu.
+    /// </summary>
+
     public class TrayIcon
     {
         private readonly NotifyIcon _notifyIcon;

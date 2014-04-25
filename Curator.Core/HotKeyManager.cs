@@ -15,6 +15,10 @@ namespace Curator.Core
         public const int WM_HOTKEY_MSG_ID = 0x0312;
     }
 
+
+    /// <summary>
+    /// Manages the hotkey bindings for the Application Manager
+    /// </summary>
     public sealed class HotKeyManager : NativeWindow, IDisposable
     {
         public HotKeyManager()

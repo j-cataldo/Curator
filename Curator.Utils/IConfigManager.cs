@@ -5,6 +5,10 @@ using System.Text;
 
 namespace Curator.Utils
 {
+    /// <summary>
+    /// Interface for abstracting ConfigManager from the UI wiring
+    /// </summary>
+
     public interface IConfigManager
     {
         int Interval { get; set;}

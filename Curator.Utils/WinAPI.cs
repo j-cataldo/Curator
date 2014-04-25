@@ -12,6 +12,10 @@ using Microsoft.Win32;
 
 namespace Curator.Utils
 {
+    /// <summary>
+    /// Wrapper class for various win32 library API calls
+    /// </summary>
+
     public static class WinAPI
     {
         [DllImport("user32.dll", CharSet = CharSet.Auto)]

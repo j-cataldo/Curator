@@ -10,6 +10,12 @@ namespace Curator.Utils
 {
     public enum StretchStyles { Fill, Fit, Stretch, Center, CenterFit, Tile };
 
+    /// <summary>
+    /// Wrapper class for various image resizing methods
+    /// Bitmap images are resized in place as reference variables.
+    /// High-quality manipulations are used when possible.
+    /// </summary>
+
     public static class ImageResizer
     {
         public static void Fit(ref Bitmap original, float height, float width)
@@ -103,6 +109,7 @@ namespace Curator.Utils
                 Fit(ref original, height, width);
         }
 
+        // We set the Windows Registry stretch style to Tile, so this is performed automatically
         public static void Tile(ref Bitmap original, float height, float width)
         { }
     }

@@ -40,8 +40,8 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(328, 205);
             this.label1.TabIndex = 0;
-            this.label1.Text = "\r\nDesktop Curator Alpha v1.0\r\n\r\n\r\nCreated by:\r\nJames Cataldo\r\nOskari Rautiainen\r\n" +
-    "Scott Sacci\r\nRobert Stephens";
+            this.label1.Text = "\r\nDesktop Curator Beta v1.0\r\n\r\n\r\nCreated by:\r\nJames Cataldo\r\nOskari Rautiainen\r\nS" +
+    "cott Sacci\r\nRobert Stephens";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // button1

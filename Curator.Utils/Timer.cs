@@ -7,12 +7,12 @@ using System.Windows.Forms;
 
 namespace Curator.Utils
 {
+    /// <summary>
+    /// Timer wrapper class, implemented as a singleton object
+    /// </summary>
+    
     public sealed class SlideshowTimer : System.Windows.Forms.Timer
     {
-        /// <summary>
-        /// Timer wrapper class, implemented as a singleton object
-        /// </summary>
-
         private static SlideshowTimer _timerInstance;
         private static readonly object _timerInstanceSync = new object(); // In case we want to multithread later
 
@@ -41,6 +41,8 @@ namespace Curator.Utils
             }
         }
 
+        // Set the wallpaper to the next image when the timer ticks
+        // Add any other processing performed at the same time to this event handler
         private void timer_Tick(object sender, EventArgs e)
         {
             WallpaperChanger.GetInstance.SetNextWallpaper();

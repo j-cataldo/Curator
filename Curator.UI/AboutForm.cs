@@ -9,12 +9,13 @@ using System.Windows.Forms;
 
 namespace Curator.UI
 {
+    /// <summary>
+    /// About Dialog, implemented as a singleton class object
+    /// Only one instance of this class can exist at a time.
+    /// </summary>
+
     public partial class AboutForm : Form
     {
-        /// <summary>
-        /// About Dialog, implemented as a singleton class object
-        /// </summary>
-
         private static AboutForm _formInstance;
         private static readonly object _formInstanceSync = new object(); // In case we want to multithread UI later
 

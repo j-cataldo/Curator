@@ -10,12 +10,11 @@ using System.Windows.Forms;
 
 namespace Curator.Core
 {
+    /// <summary>
+    /// Another singleton class. Manages configuration settings in memory, and saving/loading from text file in application directory.
+    /// </summary>
         public class ConfigManager : Curator.Utils.IConfigManager
         {
-            /// <summary>
-            /// Another singleton class. Manages configuration settings, in memory for now.
-            /// </summary>
-
             private static ConfigManager _configManagerInstance;
             private static readonly object _configManagerInstanceSync = new object(); // In case we want to multithread later
 
@@ -77,6 +76,8 @@ namespace Curator.Core
 
                 else
                 {
+                    // Load defaults
+
                     this._interval = 15000;
                     this._wallpaperLocations.Add(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures));
                     this._stretchStyle = Curator.Utils.StretchStyles.Stretch;

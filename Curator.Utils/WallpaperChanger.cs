@@ -11,19 +11,19 @@ using System.Runtime.InteropServices;
 
 namespace Curator.Utils
 {
+    /// <summary>
+    /// Another singleton class. Does most of the heavy lifting for slideshow transitioning.
+    /// </summary>
+    
     public class WallpaperChanger
     {
-        /// <summary>
-        /// Another singleton class. Does most of the heavy lifting for slideshow transitioning.
-        /// </summary>
-
         private static WallpaperChanger _wallpaperChangerInstance;
         private static readonly object _wallpaperChangerInstanceSync = new object(); 
 
+        // Private settings variables. Use corresponding properties for direct access.
         private StretchStyles _stretchStyle;
         private List<string> _selectedWallpaperLocations;
         private List<string> _wallpaperImagePaths;
-        
 
         private int _currentWallpaperIndex;
 
@@ -240,6 +240,9 @@ namespace Curator.Utils
 
         private void ResizeAndSetWallpaperWithRetry(string path)
         {
+            // Try to set the wallpaper 10 times over 1.5s
+            // Both saving and setting may fail if hard drive is busy, so they are each tried at every attempt
+
             var attempts = 0;
 
             while (attempts < 10)
@@ -295,6 +298,7 @@ namespace Curator.Utils
                 Directory.CreateDirectory(outputFolder);
             }
 
+            // Safest way to save image to file without excessive resource use
             using (MemoryStream memory = new MemoryStream())
             {
                 using (FileStream file = new FileStream(Path.Combine(outputFolder, @"temp.bmp"), FileMode.Create, FileAccess.ReadWrite))
@@ -309,6 +313,7 @@ namespace Curator.Utils
             image.Dispose();
         }
 
+        // This function actually sets the current desktop wallpaper to image at the given path
         private void SetWallpaperUsingActiveDesktop(string path)
         {
             EnableActiveDesktop();
@@ -349,6 +354,10 @@ namespace Curator.Utils
             _currentWallpaperIndex = 0;
         }
     }
+
+    /// <summary>
+    /// Thread-safe random implementation for reliably shuffling wallpaper list
+    /// </summary>
 
     public static class ThreadSafeRandom
     {

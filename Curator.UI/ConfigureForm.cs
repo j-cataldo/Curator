@@ -12,6 +12,11 @@ using System.Diagnostics;
 
 namespace Curator.UI
 {
+    /// <summary>
+    /// Configuration dialog form implementation.
+    /// Contains event handlers and wiring for all form controls.
+    /// </summary>
+
     public partial class ConfigureForm : Form
     {
         private Curator.Utils.IConfigManager _configManager;
