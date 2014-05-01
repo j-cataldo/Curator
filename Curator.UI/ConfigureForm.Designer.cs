@@ -532,7 +532,7 @@
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "ConfigureForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Desktop Curator Beta";
+            this.Text = "Desktop Curator v1.0";
             this.Load += new System.EventHandler(this.ConfigureForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
