@@ -27,6 +27,14 @@ namespace Curator.UI
             this._configManager = configManager;
         }
 
+        public System.Windows.Forms.PictureBox ImagePreview
+        {
+            get
+            {
+                return this.imagePreview;
+            }
+        }
+
         protected virtual void OnApplyChanges(EventArgs e)
         {
             int interval = Convert.ToInt32(timeIntervalInput.Text);

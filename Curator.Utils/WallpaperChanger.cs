@@ -19,7 +19,9 @@ namespace Curator.Utils
     public class WallpaperChanger
     {
         private static WallpaperChanger _wallpaperChangerInstance;
-        private static readonly object _wallpaperChangerInstanceSync = new object(); 
+        private static readonly object _wallpaperChangerInstanceSync = new object();
+
+        private IConfigManager _configManager;
 
         // Private settings variables. Use corresponding properties for direct access.
         private StretchStyles _stretchStyle;
@@ -27,6 +29,7 @@ namespace Curator.Utils
         private List<string> _wallpaperImagePaths;
 
         private int _currentWallpaperIndex;
+        private Image _previewImage;
 
         private WallpaperChanger()
         {
@@ -49,6 +52,18 @@ namespace Curator.Utils
                 }
 
                 return _wallpaperChangerInstance;
+            }
+        }
+
+        public IConfigManager ConfigManager
+        {
+            get
+            {
+                return this._configManager;
+            }
+            set
+            {
+                this._configManager = value;
             }
         }
 
@@ -329,6 +344,12 @@ namespace Curator.Utils
                 Directory.CreateDirectory(outputFolder);
             }
 
+            if (this._previewImage != null)
+            {
+                this._previewImage.Dispose();
+            }
+            this.ConfigManager.ImagePreview.Image = null;
+
             // Safest way to save image to file without excessive resource use
             using (MemoryStream memory = new MemoryStream())
             {
@@ -362,6 +383,11 @@ namespace Curator.Utils
             thread.Start();
             thread.Join(2000);
 
+            Image temp = Image.FromFile(path);
+            this._previewImage = new Bitmap(temp, new Size(320, 180));
+            temp.Dispose();
+
+            this.ConfigManager.ImagePreview.Image = this._previewImage;
         }
 
         private void EnableActiveDesktop()

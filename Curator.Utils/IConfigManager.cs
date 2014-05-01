@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Curator.Utils
 {
@@ -15,6 +16,7 @@ namespace Curator.Utils
         List<string> WallpaperLocations { get; set; }
         string subreddits { get; set; }
         Curator.Utils.StretchStyles StretchStyle { get; set; }
+        System.Windows.Forms.PictureBox ImagePreview { get; }
      
         void showConfigureForm();
     }

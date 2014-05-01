@@ -120,6 +120,14 @@ namespace Curator.Core
                 }
             }
 
+            public System.Windows.Forms.PictureBox ImagePreview
+            {
+                get
+                {
+                    return this._configureForm.ImagePreview;
+                }
+            }
+
             public void showConfigureForm()
             {
                 if (this._configureForm == null || !this._configureForm.Visible)

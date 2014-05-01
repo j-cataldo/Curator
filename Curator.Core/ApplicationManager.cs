@@ -19,9 +19,12 @@ namespace Curator.Core
 
         public ApplicationManager()
         {
+            _trayIcon = new Curator.UI.TrayIcon(ConfigManager.GetInstance);
+
             Curator.Utils.SlideshowTimer.GetInstance.Interval = ConfigManager.GetInstance.Interval;
             Curator.Utils.WallpaperChanger.GetInstance.SelectedWallpaperLocations = ConfigManager.GetInstance.WallpaperLocations;
             Curator.Utils.WallpaperChanger.GetInstance.StretchStyle = ConfigManager.GetInstance.StretchStyle;
+            Curator.Utils.WallpaperChanger.GetInstance.ConfigManager = ConfigManager.GetInstance;
 
             //RegisterHotKey (Handle, Hotkey Identifier, Modifiers, Key)
             Curator.Utils.WinAPI.RegisterHotKey(HotKeyManager.Handle, 0, Constants.ALT + Constants.CTRL, (int)Keys.PageUp);
@@ -29,7 +32,6 @@ namespace Curator.Core
             Curator.Utils.WinAPI.RegisterHotKey(HotKeyManager.Handle, 2, Constants.ALT + Constants.CTRL, (int)Keys.End);
             Curator.Utils.WinAPI.RegisterHotKey(HotKeyManager.Handle, 3, Constants.ALT + Constants.CTRL, (int)Keys.Home);
 
-            _trayIcon = new Curator.UI.TrayIcon(ConfigManager.GetInstance);
             Curator.UI.ConfigureForm configureForm = new Curator.UI.ConfigureForm(ConfigManager.GetInstance);
             ConfigManager.GetInstance.ConfigureForm = configureForm;
             configureForm.ShowDialog();
