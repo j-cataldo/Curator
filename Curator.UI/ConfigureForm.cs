@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 
+
 namespace Curator.UI
 {
     /// <summary>
@@ -343,17 +344,28 @@ namespace Curator.UI
         {// remove source button
             if ( this.sourcesTreeView.SelectedNode != null)
             {
-                string xsource = this.sourcesTreeView.SelectedNode.Text;
-                List<String> temp = new List<string>();
-                int same = 0;
-                foreach (string source in _configManager.WallpaperLocations)
+                if(_configManager.WallpaperLocations.Count == 1)
                 {
-                    same = String.Compare(source, xsource);
-                    if (same != 0) { temp.Add(source); }
+                    MessageBox.Show("Can not remove only source.", "Curator Desktop Wallpaper Changer");
                 }
-                _configManager.WallpaperLocations = temp;
-                this.sourcesTreeView.Nodes.Remove(this.sourcesTreeView.SelectedNode);
-                applyButton.Enabled = true;
+
+                else 
+                {
+                    string xsource = this.sourcesTreeView.SelectedNode.Text;
+                    List<String> temp = new List<string>();
+                    int same = 0;
+                    foreach (string source in _configManager.WallpaperLocations)
+                    {
+                        same = String.Compare(source, xsource);
+                        if (same != 0) { temp.Add(source); }
+                    }
+                    _configManager.WallpaperLocations = temp;
+                    this.sourcesTreeView.Nodes.Remove(this.sourcesTreeView.SelectedNode);
+                    applyButton.Enabled = true;
+                }
+
+
+                
             }
         }
 
