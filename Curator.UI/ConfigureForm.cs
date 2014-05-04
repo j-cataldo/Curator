@@ -44,6 +44,7 @@ namespace Curator.UI
             string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Curator\temp\settings.txt");
             string styles = "fill";
             List<string> papers = _configManager.WallpaperLocations;
+            int number = interval;
 
             switch (index)
             {
@@ -100,12 +101,14 @@ namespace Curator.UI
                     break;
             }
 
-
+            index = selectedTimeUnits.SelectedIndex;
             //output to file here
             // create settings file and put info into it. 
             using (FileStream file = File.Create(path))
             {
-                string settings = interval.ToString();
+                string settings = index.ToString();
+                settings += "\r\n";
+                settings += number.ToString();
                 settings += "\r\n";
                 settings += styles;
                 foreach (var loc in papers)
@@ -151,15 +154,34 @@ namespace Curator.UI
 
         private void ConfigureForm_Load(object sender, EventArgs e)
         {
-            int interval = _configManager.Interval;
-
-            styleComboBox.SelectedIndex = (int)_configManager.StretchStyle;
-            selectedTimeUnits.SelectedIndex = 0;
-            timeIntervalInput.Text = Convert.ToString(interval / 1000);
-
-            PopulateImageSetTree();
-
-            applyButton.Enabled = false;
+           int interval = _configManager.Interval;
+           int unit  = _configManager.Unit;
+           selectedTimeUnits.SelectedIndex = unit;
+           int scaleFactor;
+           switch (unit)
+           {
+               case 0:
+                   scaleFactor = 1000;
+                   break;
+               case 1:
+                   scaleFactor = 60 * 1000;
+                   break;
+               case 2:
+                   scaleFactor = 60 * 60 * 1000;
+                   break;
+               case 3:
+                   scaleFactor = 24 * 60 * 60 * 1000;
+                   break;
+               default:
+                   scaleFactor = 1000;
+                   break;
+           }
+           interval /= scaleFactor;
+           selectedTimeUnits.SelectedIndex = unit;
+           styleComboBox.SelectedIndex = (int)_configManager.StretchStyle;
+           timeIntervalInput.Text = Convert.ToString(interval);
+           PopulateImageSetTree();
+           applyButton.Enabled = false;
         }
 
         private void applyButton_Click(object sender, EventArgs e)
@@ -225,7 +247,7 @@ namespace Curator.UI
         {
             applyButton.Enabled = true;
         }
-
+        
         private void timeIntervalInput_TextChanged(object sender, EventArgs e)
         {
             applyButton.Enabled = true;
