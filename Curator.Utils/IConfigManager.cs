@@ -13,6 +13,7 @@ namespace Curator.Utils
     public interface IConfigManager
     {
         int Interval { get; set;}
+        int Unit { get; set; }
         List<string> WallpaperLocations { get; set; }
         string subreddits { get; set; }
         Curator.Utils.StretchStyles StretchStyle { get; set; }
