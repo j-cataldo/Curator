@@ -17,12 +17,11 @@ namespace Curator.Core
         {
             private static ConfigManager _configManagerInstance;
             private static readonly object _configManagerInstanceSync = new object(); // In case we want to multithread later
-
             private int _interval;
             private List<string> _wallpaperLocations;
             private string _subreddits;
             private Curator.Utils.StretchStyles _stretchStyle;
-
+            private int _unit;
             private Curator.UI.ConfigureForm _configureForm;
 
             private ConfigManager() // sets initial settings of applicatoin
@@ -36,9 +35,35 @@ namespace Curator.Core
                     using (StreamReader sr = File.OpenText(path))
                     {
                         string stat = "";
-                        // intervals
+                        // set index 
+                        stat = sr.ReadLine();
+                        _unit = Convert.ToInt32(stat);
+                        int scaleFactor = 1;
+                        switch (_unit)
+                        {
+                            case 0:
+                                scaleFactor = 1000;
+                                break;
+                            case 1:
+                                scaleFactor = 60 * 1000;
+                                break;
+                            case 2:
+                                scaleFactor = 60 * 60 * 1000;
+                                break;
+                            case 3:
+                                scaleFactor = 24 * 60 * 60 * 1000;
+                                break;
+                            default:
+                                scaleFactor = 1000;
+                                break;
+                        }
+
+
+
+                        // set intervals
                         stat = sr.ReadLine();
                         _interval = Convert.ToInt32(stat);
+                        _interval *= scaleFactor;
                         //for style types
                         stat = sr.ReadLine();
                         int same = String.Compare(stat, "fill");
@@ -148,6 +173,19 @@ namespace Curator.Core
                     Curator.Utils.SlideshowTimer.GetInstance.Interval = this._interval;
                 }
             }
+
+            public int Unit 
+            {
+                get
+                {
+                    return this._unit;
+                }
+                set 
+                {
+                    this._unit = value;
+                }
+           } 
+                       
 
             public List<string> WallpaperLocations
             {
