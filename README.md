@@ -36,6 +36,10 @@ Easy-To-Use GUI
 ===============
 This graphical user interface was designed with the user in mind. With minimalist design, and a higher level of granularity given to the user, we have created the iTunes of wallpaper management.
 
+Wider Basis of Image Options
+============================
+Not only does Curator allow compatibility with multiple image formats (including JPEG, BMP, PNG, and TIFF) but method in which these can be set as backgrounds allows the user to pick between stretching an image, filling or fitting to the screen, or a host more all based on user preference!
+
 Adding A Folder
 ===============
 Adding a folder of images to your background queue in Curator is as simple as clicking 'Add Source' and navigating to the directory you wish to add, then clickong 'Ok'
