@@ -29,7 +29,7 @@ namespace Curator.Utils
         private List<string> _wallpaperImagePaths;
 
         private int _currentWallpaperIndex;
-        private Image _previewImage;
+        private Bitmap _previewImage;
 
         private WallpaperChanger()
         {
@@ -384,7 +384,8 @@ namespace Curator.Utils
             thread.Join(2000);
 
             Image temp = Image.FromFile(path);
-            this._previewImage = new Bitmap(temp, new Size(320, 180));
+            this._previewImage = new Bitmap(temp);
+            Curator.Utils.ImageResizer.Stretch(ref this._previewImage, 180, 320);
             temp.Dispose();
 
             this.ConfigManager.ImagePreview.Image = this._previewImage;
