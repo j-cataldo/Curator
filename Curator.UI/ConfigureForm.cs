@@ -336,7 +336,11 @@ namespace Curator.UI
 
                 ProcessStartInfo start = new ProcessStartInfo("C:\\Python27\\python.exe");
                 String script_path = Application.StartupPath;
-                script_path = script_path.Replace("\\Curator.Core\\bin\\Debug", "");
+
+                if (script_path.Contains("\\Curator.Core\\bin\\Debug"))
+                {
+                    script_path = script_path.Replace("\\Curator.Core\\bin\\Debug", "");
+                }
                 start.WorkingDirectory = script_path;
                 System.Diagnostics.Debug.WriteLine(script_path);
 
