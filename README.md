@@ -1,8 +1,7 @@
 Curator
 =======
 
-Curator - A Windows desktop wallpaper management and collection tool, creating a bridge between folders across your computer and subreddit
-
+Curator - A Windows desktop wallpaper management and collection tool, creating a bridge between folders across your computer and networks
 
 Created by:
 
@@ -17,8 +16,11 @@ Robert Stephens
 
 Installation
 ============
-For Curator to work properly, python 2.7 or up must be installed on your C: drive.
+Run Setup.exe, follow the steps, and start Desktop Curator!
 
+Uninstallation
+==============
+The uninstaller can be run through the Windows Control Panel, under "Uninstall a Program", or "Add/Remove Programs" on older versions of Windows.
 
 Key Features
 ============
@@ -45,3 +47,7 @@ Thanks to the Reddit API allowing the use of multi-subreddit search, instead of 
 Improved Multi-Montior Support
 ==============================
 Curator automatically detects if you are using two or more monitors, and will assign differnt backgrounds to each monitor, staggering when each is changed. So if you have two monitors, and assign a change every 30 seconds, after 30 seconds, the first monitors background will change, and then after another 30 seconds, the second monitor's background will change.
+
+Notes
+=====
+For Curator's Reddit integration feature to work properly, Python 2.7 must be installed on your C:\ drive (in the directory C:\Python27).
