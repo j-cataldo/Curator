@@ -223,8 +223,7 @@ namespace Curator.Utils
                 int num_monitors = Screen.AllScreens.Length;
                 int index = _currentWallpaperIndex;
                 Bitmap img_cat = new Bitmap(_wallpaperImagePaths[_currentWallpaperIndex]);
-
-
+               
                 // Multi-monitor support works only if the windows default style variable is set to tiled
 
                 RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true);
@@ -232,14 +231,14 @@ namespace Curator.Utils
                 key.SetValue(@"WallpaperStyle", 0.ToString());
                 key.SetValue(@"TileWallpaper", 1.ToString());
 
-                for (int i = 0; i < num_monitors; i++)
+                for (int i = 0; i < num_monitors-1; i++)
                 {
                     if (++index >= _wallpaperImagePaths.Count)
                     {
                         index = 0;
                     }
 
-                    Bitmap img_tmp = new Bitmap(_wallpaperImagePaths[index]);
+                    Bitmap img_tmp = new Bitmap(new Bitmap(_wallpaperImagePaths[index]));
 
                     switch (this.StretchStyle)
                     {
@@ -267,14 +266,7 @@ namespace Curator.Utils
 
                     }
 
-                    if (i == 0)
-                    {
-                        img_cat = new Bitmap(img_tmp);
-                    }
-                    else
-                    {
-                        img_cat = ImageCat.Cat(img_cat, img_tmp);
-                    }
+                    img_cat = ImageCat.Cat(img_cat, img_tmp);
                 }
                 string multi_path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Curator\temp\temp_multi.bmp");
                 img_cat.Save(multi_path);
